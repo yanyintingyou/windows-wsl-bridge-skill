@@ -1,14 +1,24 @@
 ---
-name: windows-wsl-bridge
+name: windows-wsl-bridge-skill
 description: Use when a Windows-hosted coding agent needs to inspect, read, write, or run commands in a user's WSL Linux distribution without pretending Windows and WSL are the same environment.
-version: 1.0.0
-author: Hermes Agent
 license: MIT
-platforms: [windows]
+compatibility: Windows host with wsl.exe; examples use Ubuntu-24.04 and must be adjusted to the discovered WSL distribution, users, paths, and sandbox policy.
 metadata:
+  version: "1.0.0"
+  author: yanyintingyou
+  platforms:
+    - windows
+  tags:
+    - windows
+    - wsl
+    - bridge
+    - codex
+    - sandbox
+    - filesystem
   hermes:
-    tags: [windows, wsl, bridge, codex, sandbox, filesystem]
-    related_skills: [safety-guard, systematic-debugging]
+    related_skills:
+      - safety-guard
+      - systematic-debugging
 ---
 
 # Windows WSL Bridge
@@ -151,18 +161,13 @@ For any write across the Windows/WSL boundary:
 6. Verify ownership, permissions, or line endings when relevant.
 7. Report exactly what changed.
 
-Example from Windows into WSL:
+Example from Windows into WSL using a short single-line Python command:
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -- bash -lc "python3 - <<'PY'
-from pathlib import Path
-p = Path('/home/lty/agent-write-check/README.md')
-p.parent.mkdir(parents=True, exist_ok=True)
-p.write_text('# WSL write check\n', encoding='utf-8')
-print(p)
-print(p.read_text(encoding='utf-8'))
-PY"
+wsl.exe -d Ubuntu-24.04 -- python3 -c "from pathlib import Path; p = Path('/home/lty/agent-write-check/README.md'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('# WSL write check\n', encoding='utf-8'); print(p); print(p.read_text(encoding='utf-8'))"
 ```
+
+For longer or multi-file logic, first write a reviewed script file into the target workspace, then execute that file through `wsl.exe`. Do not embed complex multi-line scripts inside nested PowerShell/Bash quoting.
 
 ## Common Pitfalls
 
