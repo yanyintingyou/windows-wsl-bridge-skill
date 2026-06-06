@@ -1,0 +1,7 @@
+interface:
+  display_name: "Windows WSL Bridge"
+  short_description: "Safe Windows-agent access to WSL"
+  default_prompt: "Use $windows-wsl-bridge to inspect and operate a user's WSL Linux distribution safely from a Windows-hosted agent."
+
+policy:
+  allow_implicit_invocation: true
