@@ -1,5 +1,7 @@
 # Windows WSL Bridge Skill
 
+简体中文 | [English](README.md)
+
 `windows-wsl-bridge` 是一个面向 Windows 端 agent 的可复用 skill，用来安全访问用户的 WSL Linux 发行版：包括检查、读取、写入文件，以及通过 `wsl.exe` 运行 Linux 命令。
 
 核心场景是：Windows 桌面 agent 可以访问 Windows 文件系统并调用 `wsl.exe`，但真正需要使用的 Linux 工具、服务、用户目录或开发环境位于 WSL 中。
