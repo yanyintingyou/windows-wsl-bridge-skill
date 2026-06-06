@@ -1,5 +1,7 @@
 # Windows WSL Bridge Skill
 
+[简体中文](README.zh-CN.md) | English
+
 `windows-wsl-bridge` is a reusable agent skill for Windows-hosted coding agents that need to inspect, read, write, or run commands inside a user's WSL Linux distribution safely.
 
 The core use case is a Windows desktop agent, such as a local coding assistant, that can access Windows files and invoke `wsl.exe`, while the required Linux tooling or user workspace lives inside WSL.
